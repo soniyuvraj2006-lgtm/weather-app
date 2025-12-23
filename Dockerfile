@@ -1,21 +1,21 @@
-# 1️⃣ Use official Node image
+# Use Node image
 FROM node:20-alpine
 
-# 2️⃣ Set working directory inside container
+# Set working directory inside container
 WORKDIR /app
 
-# 3️⃣ Copy package files first (for caching)
+# Copy package files first (for caching)
 COPY package*.json ./
 
-# 4️⃣ Install dependencies
+# Install dependencies
 RUN npm install
 
-# 5️⃣ Copy rest of the app
+# Copy rest of the app
 COPY . .
 
-# 6️⃣ Expose port
+# Expose port
 EXPOSE 3000
 
-# 7️⃣ Start the app
+# Start the app
 CMD ["node", "index.js"]
 
