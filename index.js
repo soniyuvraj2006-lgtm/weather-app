@@ -8,7 +8,7 @@ const axios = require("axios");
 // Create app
 const app = express();
 app.use(express.static("public"));
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 
 // Weather route
