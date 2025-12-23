@@ -7,12 +7,9 @@ const axios = require("axios");
 
 // Create app
 const app = express();
-const PORT = 3000;
+app.use(express.static("public"));
+const PORT = process.env.PORT || 3000;
 
-// Home route
-app.get("/", (req, res) => {
-  res.send("Weather App is running 🌦");
-});
 
 // Weather route
 app.get("/weather", async (req, res) => {
@@ -35,7 +32,7 @@ app.get("/weather", async (req, res) => {
       weather: data.weather[0].description
     });
   } catch (error) {
-    res.send("City not found");
+    res.status(404).json({ error: "City not found" });
   }
 });
 
