@@ -35,6 +35,30 @@ app.get("/weather", async (req, res) => {
     res.status(404).json({ error: "City not found" });
   }
 });
+app.get("/forecast", async (req, res) => {
+  const city = req.query.city;
+  const apiKey = process.env.WEATHER_API_KEY;
+
+  if (!city) {
+    return res.json({ error: "City is required" });
+  }
+
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+  try {
+    const response = await axios.get(url);
+    const list = response.data.list;
+
+    // Pick one forecast per day (12:00 PM)
+    const dailyForecast = list.filter(item =>
+      item.dt_txt.includes("12:00:00")
+    );
+
+    res.json(dailyForecast.slice(0, 5));
+  } catch (err) {
+    res.json({ error: "Unable to fetch forecast" });
+  }
+});
 
 // Start server
 app.listen(PORT, () => {

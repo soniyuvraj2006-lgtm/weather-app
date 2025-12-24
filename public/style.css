@@ -95,4 +95,49 @@ button:hover {
     transform: translateY(0);
   }
 }
+.forecast {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px;
+  scroll-behavior: smooth;
+
+  /* 🔒 Important fixes */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.forecast::-webkit-scrollbar {
+  height: 6px;
+}
+
+.forecast::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.4);
+  border-radius: 10px;
+}
+
+
+.forecast-card {
+  background: rgba(255,255,255,0.2);
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+
+  /* 🔒 Lock card size */
+  min-width: 110px;
+  max-width: 110px;
+  flex-shrink: 0;
+
+  animation: slideUp 0.5s ease forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
