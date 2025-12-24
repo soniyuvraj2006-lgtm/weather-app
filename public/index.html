@@ -3,130 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <title>Weather App</title>
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #74ebd5, #9face6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      width: 320px;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-
-    h1 {
-      margin-bottom: 20px;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #4f46e5;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #4338ca;
-    }
-
-    .result {
-      margin-top: 20px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    /* Spinner */
-    .spinner {
-      margin: 20px auto;
-      width: 40px;
-      height: 40px;
-      border: 4px solid #ddd;
-      border-top: 4px solid #4f46e5;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      display: none;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-  <div class="card">
-    <h2>🌍 My First Weather App</h2>
+  <div class="app">
+    <div class="card fade-in">
+      <h1>🌤 Weather</h1>
 
-    <input id="city" placeholder="Enter city name" />
-    <button onclick="getWeather()">Get Weather</button>
+      <input id="city" placeholder="Enter city name" />
+      <button onclick="getWeather()">Get Weather</button>
 
-    <div class="spinner" id="spinner"></div>
-    <div class="result" id="result"></div>
+      <div class="loader" id="loader"></div>
+      <div class="result" id="result"></div>
+    </div>
   </div>
 
-  <script>
-    async function getWeather() {
-      const city = document.getElementById("city").value;
-      const result = document.getElementById("result");
-      const spinner = document.getElementById("spinner");
-
-      if (!city) {
-        result.innerText = "Please enter a city name";
-        return;
-      }
-
-      result.innerText = "";
-      spinner.style.display = "block";
-
-      try {
-        const response = await fetch(`/weather?city=${city}`);
-        const data = await response.json();
-
-        spinner.style.display = "none";
-
-        if (data.error) {
-          result.innerText = data.error;
-        } else {
-          result.innerText =
-            `${data.city}: ${data.temperature}°C, ${data.weather}`;
-        }
-      } catch (error) {
-        spinner.style.display = "none";
-        result.innerText = "Something went wrong";
-      }
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
 
